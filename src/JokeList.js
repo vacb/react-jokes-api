@@ -24,6 +24,7 @@ class JokeList extends Component {
   }
 
   async getJokes() {
+    try {
     let jokes = [];
     // While, not for, to avoid duplicates
     while (jokes.length < this.props.numJokesToGet) {
@@ -44,7 +45,10 @@ class JokeList extends Component {
       jokes: [...st.jokes, ...jokes]
     }),
       () => window.localStorage.setItem("jokes", JSON.stringify(this.state.jokes))
-    );
+      );
+    } catch (e) {
+      alert(e);
+    }
   }
   
   handleVote(id, delta) {
