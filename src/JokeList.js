@@ -11,12 +11,16 @@ class JokeList extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { jokes: JSON.parse(window.localStorage.getItem("jokes")) || "[]" };
+    this.state = {
+      jokes: JSON.parse(window.localStorage.getItem("jokes") || "[]"),
+      loading: false
+    };
+    this.seenJokes = new Set(this.state.jokes.map(j => j.text));
     this.handleClick = this.handleClick.bind(this);
   }
   
   componentDidMount() {
-    this.getJokes();
+    if (this.state.jokes.length === 0) this.getJokes();
   }
 
   async getJokes() {
@@ -26,9 +30,17 @@ class JokeList extends Component {
       let res = await axios.get("https://icanhazdadjoke.com/", {
         headers: { Accept: "application/json"}
       });
-      jokes.push({ id: uuidv4(), text: res.data.joke, votes: 0 });
+      let newJoke = res.data.joke;
+      if (!this.seenJokes.has(newJoke)) {
+        jokes.push({ id: uuidv4(), text: newJoke, votes: 0 });
+      } else {
+        console.log("Found a duplicate");
+        console.log(newJoke);
+      }
+      
     }
     this.setState(st => ({
+      loading: false,
       jokes: [...st.jokes, ...jokes]
     }),
       () => window.localStorage.setItem("jokes", JSON.stringify(this.state.jokes))
@@ -47,10 +59,19 @@ class JokeList extends Component {
   }
 
   handleClick() {
-    this.getJokes();
+    // Pass this.getJokes as a callback to run after loading is set to true
+    this.setState({ loading: true }, this.getJokes);
   }
 
   render() {
+    if (this.state.loading) {
+      return (
+        <div className="JokeList-spinner">
+          <i className="far fa-8x fa-laugh fa-spin" />
+          <h1 className="JokeList-title">Loading...</h1>
+        </div>
+      );
+    }
     return (
       <div className="JokeList">
         <div className="JokeList-sidebar">
