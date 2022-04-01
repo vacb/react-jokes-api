@@ -21,10 +21,12 @@ Useful things I practiced while doing this project included:
 
 ## Links
 
-This project was built as part of a [Udemy React course](https://www.udemy.com/course/modern-react-bootcamp).
+- This project was built as part of a [Udemy React course](https://www.udemy.com/course/modern-react-bootcamp)
+- API used: [I can haz dad jokes API](https://icanhazdadjoke.com/api)
+- Emoji library used: [Emoji CSS library](https://emoji-css.afeld.me/)
+- Deployed to GitHub pages using this [deployment tutorial](https://github.com/gitname/react-gh-pages)
 
-API used: [I can haz dad jokes API](https://icanhazdadjoke.com/api)
+## Running the project
+After cloning the repo, run `npm install` to install project.
 
-Emoji library used: [Emoji CSS library](https://emoji-css.afeld.me/)
-
-Deployed to GitHub pages using this [deployment tutorial](https://github.com/gitname/react-gh-pages)
+To run the app in development mode run `npm start`. Open http://localhost:3000 to view it in your browser.
