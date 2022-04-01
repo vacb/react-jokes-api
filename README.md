@@ -6,7 +6,7 @@ This is a simple React app using class components. It fetches a list of jokes fr
 
 The project was built using [create-react-app](https://github.com/facebook/create-react-app) and uses [axios](https://www.npmjs.com/package/axios) to make API calls.
 
-Useful things I practiced while doing this project included: 
+Useful things I practised while doing this project included: 
 - React state management
 - React lifecycle methods
 - using local storage
